@@ -9,10 +9,11 @@
   flex: 1;
   display: flex;
   position: relative;
+  background-color: #f8faff;
   flex-direction: column;
   background-image: url("../../assets//images//Leftside.png");
   background-repeat: no-repeat;
-  object-fit: cover;
+  object-fit: fit;
 }
 .rightSection {
   font-family: "Lato";

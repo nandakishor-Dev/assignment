@@ -3,20 +3,18 @@ import styles from './signin.module.css'
 import { Login } from '../../components/Login'
 import googleIcon from '../../assets/images/googleicon1.png'
 import appleIcon from '../../assets/images/apple 1.png'
-import Ellipse from '../../assets/images/Ellipse 111.png'
+
 import socialIcons from '../../assets/images/github.png'
-import vector7 from '../../assets/images/Vector7.png'
-import { SignWithButton } from '../../components/SignBtn'
+
+import { SignWithButton } from '../../components/SignWithButton'
+import { Logo } from '../../components/Logo'
 
 export const Signin = () => {
     return (
         <div className={styles.container}>
             <div className={styles.leftSection}>
                 <div className='h-1/5 pl-8 pt-8'>
-                    <div className='relative '>
-                        <img src={Ellipse} alt="" class="absolute top-0 left-1 bg-no-repeat" />
-                        <img src={vector7} alt="" class="absolute top-6 left-0 object-cover bg-no-repeat" />
-                    </div>
+                    <Logo />
                 </div>
                 <div className='h-3/4  flex items-center ml-56'>
                     <p className='font-montserrat font-bold text-7xl text-white'>BASE</p>

@@ -7,6 +7,11 @@ export default {
         montserrat: ["Montserrat"],
         lato: ["Lato"],
         garamond: ["Garamond"],
+        nunito:["Nunito"],
+        figtree:["Figtree"]
+      },
+      colors: {
+        custom: '#f8faff',
       },
     },
   },
