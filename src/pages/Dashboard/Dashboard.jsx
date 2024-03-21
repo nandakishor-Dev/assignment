@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from '../../assets/images/Subtract.png'
 import { SidebarOption } from '../../components/SidebarOption'
 import dashboard from '../../assets/images/dashboard.png'
@@ -10,9 +10,48 @@ import calendar from '../../assets/images/Calendar.png'
 import upload from '../../assets/images/upload.svg'
 import noti from '../../assets/images/noti.png'
 import profile from '../../assets/images/profile.png'
+import { Button } from "../../components/Button";
+import { Table } from '../../components/Table'
+import excel from '../../assets/images/excel.png'
+import papaparse from 'papaparse'
 
 
 export const Dashboard = () => {
+    const [csvData, setCsvData] = useState()
+    const [showData, setShowData] = useState(false)
+
+    const handleDragOver = (event) => {
+        event.preventDefault();
+    };
+
+    const handleFileSelect = (e) => {
+        // setUploadFiles(e.target.files[0]);
+        setShowData(false)
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const csvContent = event.target.result;
+            papaparse.parse(csvContent, {
+                header: true,
+                complete: function (results) {
+                    const data = results.data;
+                    
+                    setCsvData(data);
+                },
+            });
+        };
+
+        reader.readAsText(e.target.files[0]);
+    }
+
+    //   console.log("file",file)
+
+    const uploadData=()=>{
+        setShowData(true)
+    }
+
+
+    console.log({ csvData })
     return (
         <div className='flex'>
             <div className='bg-white w-1/6 h-screen'>
@@ -30,7 +69,7 @@ export const Dashboard = () => {
                     <SidebarOption text="Settings" image={setting} />
                 </div>
             </div>
-            <div className='bg-custom h-screen w-full pl-4 pr-4 pt-8'>
+            <div className='bg-custom  w-full pl-4 pr-4 pt-8'>
                 <div className='h-18 flex justify-between '>
                     <div><span className='font-figtree font-semibold text-2xl'>Upload CSV</span></div>
                     <div className='flex gap-6 justify-center align-middle'>
@@ -44,7 +83,36 @@ export const Dashboard = () => {
                     </div>
 
                 </div>
-                <div>
+                <div className=' h-full flex flex-col'>
+                    <div className='h-3/5  flex  justify-center '>
+
+                        <div
+                         onDragOver={handleDragOver}
+                         onDrop={handleFileSelect}
+                          className='rounded-lg bg-white h-4/5 w-2/5 flex flex-col gap-5 p-3 mt-14'  >
+                            <div className='border border-dotted rounded-lg h-4/5 flex items-center justify-center flex-col gap-5'>
+                                <div><img src={excel} alt="" /></div>
+                                <div>
+                                    Drop your excel sheet here or
+                                    <label htmlFor="fileInput" className='text-blue-500 cursor-pointer'> browse</label>
+                                    <input type="file" id="fileInput" style={{ display: 'none' }} accept=".csv" onChange={handleFileSelect} />
+                                </div>
+
+                            </div>
+                            <div className='h-1/5 '>
+                                <Button handleClick={uploadData} text="Upload" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className=' h-2/5'>
+                        <p className='font-figtree font-semibold text-2xl'>Uploads</p>
+                        <div className='flex items-center justify-center pt-5'>
+
+                            <Table tableData={csvData} showData={showData} />
+                        </div>
+
+                    </div>
 
                 </div>
             </div>

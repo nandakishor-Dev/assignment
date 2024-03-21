@@ -12,6 +12,7 @@ export default {
       },
       colors: {
         custom: '#f8faff',
+        tablebg:'#F5F5F5'
       },
     },
   },
