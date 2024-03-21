@@ -19,13 +19,15 @@ import papaparse from 'papaparse'
 export const Dashboard = () => {
     const [csvData, setCsvData] = useState()
     const [showData, setShowData] = useState(false)
+    const [fileName, setFileName] = useState("")
 
-    const handleDragOver = (event) => {
-        event.preventDefault();
-    };
 
     const handleFileSelect = (e) => {
-        // setUploadFiles(e.target.files[0]);
+
+        const fileList = e.target.files;
+        const newFiles = Array.from(fileList);
+        const file = newFiles[0].name
+        setFileName(file)
         setShowData(false)
 
         const reader = new FileReader();
@@ -35,7 +37,7 @@ export const Dashboard = () => {
                 header: true,
                 complete: function (results) {
                     const data = results.data;
-                    
+
                     setCsvData(data);
                 },
             });
@@ -46,8 +48,16 @@ export const Dashboard = () => {
 
     //   console.log("file",file)
 
-    const uploadData=()=>{
-        setShowData(true)
+    const uploadData = () => {
+        if(fileName && csvData.length>0){
+            setShowData(true)
+        }
+    }
+
+    const handleRemove = () => {
+        setFileName("")
+        setCsvData()
+        setShowData(false)
     }
 
 
@@ -87,16 +97,28 @@ export const Dashboard = () => {
                     <div className='h-3/5  flex  justify-center '>
 
                         <div
-                         onDragOver={handleDragOver}
-                         onDrop={handleFileSelect}
-                          className='rounded-lg bg-white h-4/5 w-2/5 flex flex-col gap-5 p-3 mt-14'  >
+                            className='rounded-lg bg-white h-4/5 w-2/5 flex flex-col gap-5 p-3 mt-14'  >
                             <div className='border border-dotted rounded-lg h-4/5 flex items-center justify-center flex-col gap-5'>
                                 <div><img src={excel} alt="" /></div>
                                 <div>
-                                    Drop your excel sheet here or
-                                    <label htmlFor="fileInput" className='text-blue-500 cursor-pointer'> browse</label>
-                                    <input type="file" id="fileInput" style={{ display: 'none' }} accept=".csv" onChange={handleFileSelect} />
+                                    {fileName ?
+                                        fileName :
+                                        (
+                                            <>
+                                                Drop your excel sheet here or
+                                                <label htmlFor="fileInput" className='text-blue-500 cursor-pointer'> browse</label>
+                                                <input type="file" id="fileInput" style={{ display: 'none' }} accept=".csv" onChange={handleFileSelect} />
+                                            </>
+                                        )
+                                    }
                                 </div>
+                                {fileName &&
+
+                                    <div onClick={handleRemove} className='text-red-500 cursor-pointer'>
+                                        Remove
+                                    </div>
+                                }
+
 
                             </div>
                             <div className='h-1/5 '>
