@@ -4,7 +4,7 @@ export const Table = ({ tableData, showData }) => {
     return (
         <>
             {showData &&
-                <div className='h-96  bg-tablebg w-11/12 rounded-lg p-4'>
+                <div className='h-96  pb-10  bg-tablebg w-11/12  overflow-scroll rounded-lg p-4'>
                     <div className='h-16  flex items-center'>
                         <div className='w-1/5'><span className='text-sm font-figtree font-normal pl-3'>Sl No.</span></div>
                         <div className='w-1/5'><span className='text-sm font-figtree font-normal pl-3 '>Links</span></div>
@@ -12,7 +12,7 @@ export const Table = ({ tableData, showData }) => {
                         <div className='w-1/5'><span className='text-sm font-figtree font-normal pl-3 '>Add Tags</span></div>
                         <div className='w-2/6'><span className='text-sm font-figtree font-normal pl-3 '>Selected Tags</span></div>
                     </div>
-                    <div className='pt-5 gap-5 flex h-78 flex-col overflow-scroll'>
+                    <div className='pt-5 gap-5 flex  flex-col '>
 
                         {tableData && tableData.map((row, index) => (
                             <div className='bg-white flex h-16 rounded-lg  items-center'>
