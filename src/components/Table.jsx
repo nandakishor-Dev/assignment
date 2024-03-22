@@ -4,18 +4,18 @@ export const Table = ({ tableData, showData }) => {
     return (
         <>
             {showData &&
-                <div className='h-96  pb-10  bg-tablebg w-11/12  overflow-scroll rounded-lg p-4'>
-                    <div className='h-16  flex items-center'>
+                <div className='h-screen   bg-tablebg w-11/12   rounded-lg p-4'>
+                    <div className='h-10  flex items-center'>
                         <div className='w-1/5'><span className='text-sm font-figtree font-normal pl-3'>Sl No.</span></div>
                         <div className='w-1/5'><span className='text-sm font-figtree font-normal pl-3 '>Links</span></div>
                         <div className='w-1/5'><span className='text-sm font-figtree font-normal pl-3 '>Prefix</span></div>
                         <div className='w-1/5'><span className='text-sm font-figtree font-normal pl-3 '>Add Tags</span></div>
                         <div className='w-2/6'><span className='text-sm font-figtree font-normal pl-3 '>Selected Tags</span></div>
                     </div>
-                    <div className='pt-5 gap-5 flex  flex-col '>
+                    <div  className=' pt-5 h-full gap-5 flex overflow-x-scroll  flex-col '>
 
                         {tableData && tableData.map((row, index) => (
-                            <div className='bg-white flex h-16 rounded-lg  items-center'>
+                            <div className='bg-white pt-4 pb-4 flex rounded-lg  items-center'>
                                 <div className='w-1/5'><span className='text-sm font-figtree font-normal pl-3 '>0{index + 1}</span></div>
                                 <div className='w-1/5'><span className='text-sm font-figtree font-normal pl-3 underline text-blue-500 '>{row?.links}</span></div>
                                 <div className='w-1/5'><span className='text-sm font-figtree font-normal pl-3'>{row?.prefix}</span></div>

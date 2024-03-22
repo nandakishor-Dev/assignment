@@ -64,7 +64,7 @@ export const Dashboard = () => {
     console.log({ csvData })
     return (
         <div className='flex'>
-            <div className='bg-white w-1/6 h-screen'>
+            <div className='bg-white w-1/6'>
                 <div className='h-28 flex items-center  justify-center gap-4 '>
                     <img src={logo} alt="" />
                     <span className='font-montserrat font-normal text-2xl text-black'>Base</span>
@@ -93,8 +93,8 @@ export const Dashboard = () => {
                     </div>
 
                 </div>
-                <div className=' h-full flex flex-col'>
-                    <div className='h-3/5  flex  justify-center '>
+                <div className=' min-h-screen flex flex-col'>
+                    <div className='h-96  flex  justify-center '>
 
                         <div
                             className='rounded-lg bg-white h-4/5 w-2/5 flex flex-col gap-5 p-3 mt-14'  >
@@ -127,9 +127,9 @@ export const Dashboard = () => {
                         </div>
                     </div>
 
-                    <div className=' h-2/5'>
+                    <div className=' min-h-screen'>
                         <p className='font-figtree font-semibold text-2xl'>Uploads</p>
-                        <div className='flex items-center justify-center pt-5'>
+                        <div className='flex items-center h-full justify-center  pt-5'>
 
                             <Table tableData={csvData} showData={showData} />
                         </div>
