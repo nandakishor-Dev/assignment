@@ -14,10 +14,12 @@ import { Button } from "../../components/Button";
 import { Table } from "../../components/Table";
 import excel from "../../assets/images/excel.png";
 import papaparse from "papaparse";
+import { Box, CircularProgress } from "@mui/material";
 
 export const Dashboard = () => {
     const [csvData, setCsvData] = useState();
     const [showData, setShowData] = useState(false);
+    const [showProgress, setShowProgress] = useState(false);
     const [fileName, setFileName] = useState("");
 
     const handleFileSelect = (e) => {
@@ -56,7 +58,11 @@ export const Dashboard = () => {
 
     const uploadData = () => {
         if (fileName && csvData.length > 0) {
-            setShowData(true);
+            setShowProgress(true)
+            setTimeout(() => {
+                setShowProgress(false)
+                setShowData(true);
+            }, 1000);
         }
     };
 
@@ -74,7 +80,7 @@ export const Dashboard = () => {
         setCsvData(clonedCsvData)
     }
     //remove tags
-    const handleRemoveTag = (index,tagIndex) => {
+    const handleRemoveTag = (index, tagIndex) => {
         const clonedCsvData = [...csvData]
         let { selectedTags } = clonedCsvData[index]
         selectedTags.splice(tagIndex, 1)
@@ -120,9 +126,9 @@ export const Dashboard = () => {
                         </div>
                     </div>
                 </div>
-                <div className=" min-h-screen flex flex-col">
+                <div className=" min-h-screen  flex flex-col">
                     <div className="h-96  flex  justify-center ">
-                        <div className="rounded-lg bg-white h-4/5 w-2/5 flex flex-col gap-5 p-3 mt-14">
+                        <div className="rounded-lg bg-white h-4/5 w-6/12 flex flex-col gap-5 p-3 mt-14">
                             <div className="border border-dotted rounded-lg h-4/5 flex items-center justify-center flex-col gap-5">
                                 <div>
                                     <img src={excel} alt="" />
@@ -159,8 +165,16 @@ export const Dashboard = () => {
                                     </div>
                                 )}
                             </div>
-                            <div className="h-1/5 ">
-                                <Button handleClick={uploadData} text="Upload" />
+                            <div className="h-1/5">
+                                <div className='bg-[#605bff] text-[white] border-[none] rounded-[10px] w-full h-full font-semibold  font-montserrat flex items-center justify-center cursor-pointer' onClick={uploadData}>
+                                    {showProgress ?
+                                        <Box sx={{ display: 'flex' }}>
+                                            <CircularProgress sx={{ color: "white", fontSize: 16 }} />
+                                        </Box>
+                                        :
+                                    "Upload" 
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
