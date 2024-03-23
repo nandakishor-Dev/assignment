@@ -10,9 +10,9 @@ import calendar from "../../assets/images/Calendar.png";
 import upload from "../../assets/images/upload.svg";
 import noti from "../../assets/images/noti.png";
 import profile from "../../assets/images/profile.png";
-import { Button } from "../../components/Button";
 import { Table } from "../../components/Table";
 import excel from "../../assets/images/excel.png";
+import uploadIcon from "../../assets/images/uploading.svg";
 import papaparse from "papaparse";
 import { Box, CircularProgress } from "@mui/material";
 
@@ -172,7 +172,12 @@ export const Dashboard = () => {
                                             <CircularProgress sx={{ color: "white", fontSize: 16 }} />
                                         </Box>
                                         :
-                                    "Upload" 
+                                        < div className="flex gap-2">
+
+                                            <img className="h-6 w-4" src={uploadIcon} alt="" />
+                                            <span>Upload</span>
+                                        </div>
+
                                     }
                                 </div>
                             </div>
